@@ -6,11 +6,18 @@ nrt.tab.c: nrt.y
 lex.yy.c: nrt.l nrt.tab.c
 	flex nrt.l
 
-nrt: lex.yy.c nrt.tab.c
-	gcc lex.yy.c nrt.tab.c -lfl -o nrt
+nrt_data: nrt_data.c nrt_data.h
+	gcc -c nrt_data.c
+
+nrt: lex.yy.c nrt.tab.c nrt_data
+	gcc lex.yy.c nrt.tab.c -lfl -o nrt nrt_data.o
 
 clean:
-	rm -rf nrt.tab.* lex.yy.c nrt
+	rm -rf nrt.tab.* lex.yy.c nrt nrt_data.o
+
+out.sco: nrt
+	./nrt aCallToAttention.nrt > out.sco
+	#./nrt mario.nrt > out.sco
 
 all:
 	make nrt

@@ -8,16 +8,40 @@
 %%
 [ \n\t]                  ;
 "|"	;
-[drmfsltDRMFSLTD]   return SOLF;
-[0-9]   return RHYTHM;
-[\+\=\-]   return ACC;
-[\,']   return OCT;
-[\.]   return DOT;
-"("   return LBRAC;
-")"   return RBRAC;
+[drmfsltDRMFSLTDzZ] {
+//yylval.ascii = yytext;
+yylval.sval = strdup(yytext);
+return SOLF;
+}
+[0-9]+   yylval.ival = atoi(yytext); return RHYTHM;
+[\+\=\-] {
+yylval.sval = strdup(yytext); 
+return ACC;
+}
+[\,'] {
+yylval.sval = strdup(yytext); 
+return OCT;
+}
+[\.] {
+return DOT;
+}
+"("  {
+return LPAREN;
+}
+")" {  
+return RPAREN;
+}
+"[" {  
+return LBRAC;
+}
+"]" {  
+return RBRAC;
+}
+#.*$ ;
+.   return ERROR;
 %%
 
-//main(int argc, char **argv)
+//main()
 //{
 //yylex();
 //}
