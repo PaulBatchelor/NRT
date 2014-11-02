@@ -37,7 +37,7 @@ return LBRAC;
 "]" {  
 return RBRAC;
 }
-#.*$ ;
+#.* ;
 .   return ERROR;
 %%
 
