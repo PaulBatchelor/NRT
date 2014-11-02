@@ -1,5 +1,5 @@
 default:
-
+	make all
 nrt.tab.c: nrt.y
 	bison -d nrt.y
 
@@ -21,3 +21,6 @@ out.sco: nrt
 
 all:
 	make nrt
+
+install:
+	sudo cp nrt /usr/local/bin
