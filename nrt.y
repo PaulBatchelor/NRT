@@ -196,7 +196,7 @@ void parseSolf(NRT_DATA *d, char *n)
 }
 void parseRhythm(NRT_DATA *d, int n)
 {
-    float rhythm = 0;
+    double rhythm = 0;
     switch(n) 
     {
         case 1: rhythm = 4; break;

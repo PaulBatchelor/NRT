@@ -3,8 +3,8 @@
 
 typedef struct {
 int solf;
-float time;
-float dur;
+double time;
+double dur;
 } NRT_NOTE;
 
 typedef struct {
@@ -14,8 +14,8 @@ int current_solf;
 int isCluster;
 int isRest;
 int isNewSection;
-float current_dur;
-float current_time;
+double current_dur;
+double current_time;
 int numNotes;
 }NRT_DATA;
 
@@ -23,15 +23,15 @@ void printVals(NRT_DATA *d);
 
 void changeSolf(NRT_NOTE *n, int solf);
 
-void changeDur(NRT_NOTE *n, float dur);
+void changeDur(NRT_NOTE *n, double dur);
 
-void changeTime(NRT_NOTE *n, float time);
+void changeTime(NRT_NOTE *n, double time);
 
 void updateCurrentSolf(NRT_DATA *d, int solf);
 
-void updateCurrentDur(NRT_DATA *d, float dur);
+void updateCurrentDur(NRT_DATA *d, double dur);
 
-void updateCurrentTime(NRT_DATA *d, float time);
+void updateCurrentTime(NRT_DATA *d, double time);
 
 NRT_NOTE createNewNote(NRT_DATA *d);
 

@@ -14,12 +14,12 @@ void changeSolf(NRT_NOTE *n, int solf)
     n->solf = solf;
 }
 
-void changeDur(NRT_NOTE *n, float dur)
+void changeDur(NRT_NOTE *n, double dur)
 {
     n->dur = dur;
 }
 
-void changeTime(NRT_NOTE *n, float time)
+void changeTime(NRT_NOTE *n, double time)
 {
     n->time = time;
 }
@@ -34,7 +34,7 @@ void updateCurrentSolf(NRT_DATA *d, int solf)
         d->current_solf = solf;
     }
 }
-void updateCurrentDur(NRT_DATA *d, float dur)
+void updateCurrentDur(NRT_DATA *d, double dur)
 {
     if(d->isRest == FALSE) {
         NRT_NOTE *n = &d->notes[d->index];
@@ -42,7 +42,7 @@ void updateCurrentDur(NRT_DATA *d, float dur)
     }
     d->current_dur = dur;
 }
-void updateCurrentTime(NRT_DATA *d, float time)
+void updateCurrentTime(NRT_DATA *d, double time)
 {
     NRT_NOTE *n = &d->notes[d->index];
     changeTime(n, time);
