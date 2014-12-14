@@ -8,8 +8,10 @@ double dur;
 } NRT_NOTE;
 
 typedef struct {
+/**=NOTE: Weird things are happening here*/
 NRT_NOTE notes[200];
 int index;
+NRT_NOTE note;
 int current_solf;
 int isCluster;
 int isRest;
@@ -46,6 +48,7 @@ void endCluster(NRT_DATA *d);
 void printCsoundScore(NRT_DATA *d);
 void writeCsoundScore(NRT_DATA *d, char *outfile);
 void printJSON(NRT_DATA *d);
+void printCSV(NRT_DATA *d);
 
 void incrementTime(NRT_DATA *d);
 
@@ -55,3 +58,4 @@ void transposeSolf(NRT_DATA *d, int step);
 
 void endSection(NRT_DATA *d);
 void beginSection(NRT_DATA *d);
+

@@ -14,10 +14,10 @@ main(int argc, char **argv){
     {
         switch(c)
         {
-            case 'c':
+            case 'c': /* Deprecated */
             csoundMode = TRUE;
             break;
-            case 'j':
+            case 'j': /* Deprecated */
             jsonMode = TRUE;
             break;
             case 's':
@@ -28,30 +28,38 @@ main(int argc, char **argv){
     }
     if(readFromFile == TRUE)
     {
-    filename = argv[optind];
-    if(csoundMode == TRUE){
-    scorefile = argv[optind + 1];
-    }
-    FILE *input = fopen(filename, "r");
-    if(!input)
-    {
-        printf("Error! Cannot find file.\n");
-        return -1;
-    }
-    
-    yyin = input;
-    do{
-        yyparse();
-    }while(!feof(yyin));
-    fclose(input);
+        filename = argv[optind];
+        if(csoundMode == TRUE){
+        scorefile = argv[optind + 1];
+        }
+        FILE *input = fopen(filename, "r");
+        if(!input)
+        {
+            //printf("Error! Cannot find file.\n");
+            yyin = stdin;
+            readFromFile = FALSE;
+            //return -1;
+        }else{
+            yyin = input;
+        } 
+        do{
+            yyparse();
+        }while(!feof(yyin));
+
+        if(readFromFile) fclose(input);
     }else{ 
     yy_scan_string(expr); 
     yyparse();
     }
     //if(csoundMode && readFromFile) writeCsoundScore(&nrtGlobalData, scorefile);
-    if(csoundMode && readFromFile) writeCsoundScore(&d, scorefile);
-    
-    //if(jsonMode) printJSON(&nrtGlobalData);
-    if(jsonMode) printJSON(&d);
+    //if(csoundMode && readFromFile) writeCsoundScore(&d, scorefile);
+    //
+    ////if(jsonMode) printJSON(&nrtGlobalData);
+    //if(jsonMode) printJSON(&d);
+
+    //print last note value
+    printCSV(&d);
+   
+
     return 0;
 }

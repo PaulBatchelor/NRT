@@ -29,7 +29,8 @@ void updateCurrentSolf(NRT_DATA *d, int solf)
     //rest check added for bugfix
     if(d->isRest == FALSE)
     {
-        NRT_NOTE *n = &d->notes[d->index];
+        //NRT_NOTE *n = &d->notes[d->index];
+        NRT_NOTE *n = &d->note;
         changeSolf(n, solf);
         d->current_solf = solf;
     }
@@ -37,14 +38,16 @@ void updateCurrentSolf(NRT_DATA *d, int solf)
 void updateCurrentDur(NRT_DATA *d, double dur)
 {
     if(d->isRest == FALSE) {
-        NRT_NOTE *n = &d->notes[d->index];
+        //NRT_NOTE *n = &d->notes[d->index];
+        NRT_NOTE *n = &d->note;
         changeDur(n, dur);
     }
     d->current_dur = dur;
 }
 void updateCurrentTime(NRT_DATA *d, double time)
 {
-    NRT_NOTE *n = &d->notes[d->index];
+    //NRT_NOTE *n = &d->notes[d->index];
+    NRT_NOTE *n = &d->note;
     changeTime(n, time);
     d->current_time = time;
 }
@@ -55,7 +58,7 @@ void incrementTime(NRT_DATA *d)
     d->current_time += d->current_dur;
 }
 
-    NRT_NOTE createNewNote(NRT_DATA *d){
+NRT_NOTE createNewNote(NRT_DATA *d){
     NRT_NOTE n;
     changeSolf(&n, d->current_solf);
     changeTime(&n, d->current_time);
@@ -68,7 +71,8 @@ NRT_DATA createData(){
     d.current_solf = 0;
     d.current_dur = 1;
     d.current_time = 0;
-    d.index = -1;
+    //d.index = -1;
+    d.index = 0;
     d.isCluster = FALSE;
     d.numNotes = 0;
     return d;
@@ -85,15 +89,27 @@ void addNote(NRT_DATA *d)
         d->current_time = 0;
         d->current_dur = 1;
     }
-
+    
+    if(d->numNotes > 0 && d->isRest==FALSE) {
+        printCSV(d);
+    }
     //create new note in index 
     if(d->isRest == FALSE)
     {
-        d->index++;
+        //d->index++;
         d->notes[d->index] = createNewNote(d);
+        d->note = createNewNote(d);
+        //d->note = createNewNote(d);
+        d->numNotes++;
     }
 
-    d->numNotes++;
+}
+
+void printCSV(NRT_DATA *d)
+{
+
+    NRT_NOTE *n = &d->note;
+    fprintf(stdout, "%g,%g,%d\n", n->time, n->dur, n->solf);
 }
 
 void beginCluster(NRT_DATA *d)
@@ -140,7 +156,8 @@ void transposeSolf(NRT_DATA *d, int step)
 {
     if(d->isRest == FALSE)
     {
-        NRT_NOTE *n = &d->notes[d->index];
+        //NRT_NOTE *n = &d->notes[d->index];
+        NRT_NOTE *n = &d->note;
         updateCurrentSolf(d, d->current_solf + step);    
     }
 }
