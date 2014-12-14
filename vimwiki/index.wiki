@@ -1,0 +1,8 @@
+Welcome to the *NRT* wiki page!
+
+NRT (note, rhythms, timing) is a terse music markup language inspired by 
+programs like lilypond and abc notation. It's sole purpose in life is to 
+provide musicians with a means to express melodic phrases in algorithmic and
+generative composition.
+
+Please see the [[scratchpad]] for more info...

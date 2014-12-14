@@ -1,0 +1,44 @@
+=============================
+Sat Dec 13 22:21:16 EST 2014
+=============================
+
+This one may be a big long rant since I just started this thing, so here we go.
+
+First things first, NRT should write to STDOUT instead of an array of structs. 
+This is safer, and it can allow for further user extension via unix utilities.
+
+The NRT output should be comma separated values, like so:
+
+$ ./nrt input.nrt
+0,0.5,60
+0.5,0.5,62
+0.5,0.5,64
+0.5,0.5,65
+
+From there, NRT could be piped into something like awk or perl to generate
+JSON files or csound scores. The example files should have these. 
+---
+NRT should also be able to read from STDIN... but that isn't too large of a
+concern yet... 
+---
+A distant possibility is to create a NRT API of sorts to embed NRT inside of other
+applications (think project Blake).
+
+A NRT string goes in, and a data structure comes out. I'd rather not roll my own
+data structure in C, so I'll probably learn how to use something like gnulib.
+
+---
+
+Metacharacters. We need metacharacters for algorithmic, generative stuff.
+
+Things like:
+
+* Repetition
+* Choices
+* Retrograde
+* Transposition
+* Scale filters
+
+And stuff like that.
+
+...Phew. That wasn't too bad.

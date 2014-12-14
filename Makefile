@@ -26,10 +26,6 @@ nrt: nrt_objects.o nrt_parse.c
 clean:
 	rm -rf nrt.tab.* lex.yy.c nrt nrt_data.o *.o
 
-out.sco: nrt
-	./nrt aCallToAttention.nrt > out.sco
-	#./nrt mario.nrt > out.sco
-
 all:
 	make nrt
 
