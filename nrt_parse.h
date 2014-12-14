@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "nrt.tab.h"
-#include "nrt_data.h"
+#include "nrt_vm.h"
 #include "lex.yy.h"
 
 void parseSolf(NRT_DATA *d, char *n);

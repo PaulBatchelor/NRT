@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "nrt_data.h"
+#include "nrt_vm.h"
 void printVals(NRT_DATA *d)
 {
     NRT_NOTE *n = &d->notes[d->index];
