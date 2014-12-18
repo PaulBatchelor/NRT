@@ -2,6 +2,8 @@ NRT
 ---
 
 NRT (Note, Rhythm, Timing, or "nurt") is a music notation system designed specifically
-for algorithmic composers. NRT goes in, and a list comma-separated values come out. 
+for algorithmic composers. 
 
+NRT syntax looks very similar to music notation languages like Lilypond or ABC notatoin,
+except that NRT uses a movable-do system of solfege to represent note values.
 
