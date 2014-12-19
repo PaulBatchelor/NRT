@@ -7,3 +7,9 @@ for algorithmic composers.
 NRT syntax looks very similar to music notation languages like Lilypond or ABC notatoin,
 except that NRT uses a movable-do system of solfege to represent note values.
 
+
+Compilation
+---
+At the moment, NRT can be compiled by running "make" in the top directory.
+
+NRT only needs flex and bison installed for it to work.
