@@ -90,16 +90,14 @@ void addNote(NRT_DATA *d)
         d->current_dur = 1;
     }
     
-    if(d->numNotes > 0 && d->isRest==FALSE) {
+    if(d->numNotes > 0 && d->isRest == FALSE) {
         printCSV(d);
     }
     //create new note in index 
     if(d->isRest == FALSE)
     {
-        //d->index++;
         d->notes[d->index] = createNewNote(d);
         d->note = createNewNote(d);
-        //d->note = createNewNote(d);
         d->numNotes++;
     }
 
@@ -109,7 +107,11 @@ void printCSV(NRT_DATA *d)
 {
 
     NRT_NOTE *n = &d->note;
-    fprintf(stdout, "%g,%g,%d\n", n->time, n->dur, n->solf);
+    /* Make sure note isn't a rest first */ 
+    if(d->isRest == FALSE)
+    {
+        fprintf(stdout, "%g,%g,%d\n", n->time, n->dur, n->solf);
+    }
 }
 
 void beginCluster(NRT_DATA *d)
@@ -149,7 +151,7 @@ void writeCsoundScore(NRT_DATA *d, char *outfile)
 }
 
 void addDot(NRT_DATA *d){
-    d->current_dur += d->current_dur * 0.5;
+    updateCurrentDur(d, d->current_dur + d->current_dur * 0.5);
 }
 
 void transposeSolf(NRT_DATA *d, int step)
