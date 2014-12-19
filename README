@@ -12,4 +12,6 @@ Compilation
 ---
 At the moment, NRT can be compiled by running "make" in the top directory.
 
+To install, run "sudo make install".
+
 NRT only needs flex and bison installed for it to work.
