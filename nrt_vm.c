@@ -54,7 +54,7 @@ void updateCurrentTime(NRT_DATA *d, double time)
 
 void incrementTime(NRT_DATA *d)
 {
-    printf("the current duration is %g\n", d->current_dur);
+    //printf("the current duration is %g\n", d->current_dur);
     d->current_time += d->current_dur;
 }
 
@@ -116,12 +116,13 @@ void printCSV(NRT_DATA *d)
 
 void beginCluster(NRT_DATA *d)
 {
-d->isCluster = TRUE;
+    d->current_time += d->current_dur;
+    d->isCluster = TRUE;
 }
 
 void endCluster(NRT_DATA *d)
 {
-d->isCluster = FALSE;
+    d->isCluster = FALSE;
 }
 
 void printCsoundScore(NRT_DATA *d)
