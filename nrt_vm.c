@@ -75,6 +75,9 @@ NRT_DATA createData(){
     d.index = 0;
     d.isCluster = FALSE;
     d.numNotes = 0;
+    d.printNumber = FALSE;
+    d.isNewSection = TRUE;
+    d.sep = ',';
     return d;
 }
 
@@ -110,7 +113,12 @@ void printCSV(NRT_DATA *d)
     /* Make sure note isn't a rest first */ 
     if(d->isRest == FALSE)
     {
-        fprintf(stdout, "%g,%g,%d\n", n->time, n->dur, n->solf);
+        if(d->printNumber) {
+        fprintf(stdout, "%d%c", d->numNotes,
+            d->sep);
+        }
+        fprintf(stdout, "%g%c%g%c%d\n", 
+            n->time, d->sep, n->dur, d-> sep, n->solf);
     }
 }
 

@@ -10,7 +10,7 @@ main(int argc, char **argv){
     int jsonMode = FALSE;
     int readFromFile = TRUE;
     char *expr;
-    while((c = getopt(argc, argv, "cjs:")) != -1 )
+    while((c = getopt(argc, argv, "cjs:nF:")) != -1 )
     {
         switch(c)
         {
@@ -23,6 +23,11 @@ main(int argc, char **argv){
             case 's':
             readFromFile = FALSE;
             expr = optarg;
+            case 'n':
+            d.printNumber = TRUE;
+            break;
+            case 'F':
+            d.sep = optarg[0];
             break;
         }
     }

@@ -19,6 +19,8 @@ int isNewSection;
 double current_dur;
 double current_time;
 int numNotes;
+int printNumber;
+char sep;
 }NRT_DATA;
 
 void printVals(NRT_DATA *d);
