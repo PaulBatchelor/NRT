@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <unistd.h>
-
+/*
 #include "nrt.tab.h"
 #include "nrt_vm.h"
 #include "lex.nrt.h"
+*/
+
+#include "nrt.h"
 
 void parseSolf(NRT_DATA *d, char *n);
 void parseRhythm(NRT_DATA *d, int n);

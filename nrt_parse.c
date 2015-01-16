@@ -9,8 +9,7 @@ void printCSV(NRT_DATA *d)
         if(d->printNumber) {
         fprintf(stdout, "%d%c", d->numNotes,
             d->sep);
-        }
-        fprintf(stdout, "%g%c%g%c%d\n", 
+        } fprintf(stdout, "%g%c%g%c%d\n", 
             n->time, d->sep, n->dur, d-> sep, n->solf);
     }
 }
