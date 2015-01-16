@@ -8,6 +8,7 @@
 #include "lex.nrt.h"
 */
 
+//TODO: this include is ugly
 #include "nrt.h"
 
 void parseSolf(NRT_DATA *d, char *n);

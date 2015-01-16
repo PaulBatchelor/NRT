@@ -1,21 +1,4 @@
 %{
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include "nrt.tab.h"
-//#include "nrt_data.h"
-//#include <ctype.h>
-//#include <unistd.h>
-//
-//void parseSolf(NRT_DATA *d, char *n);
-//void parseRhythm(NRT_DATA *d, int n);
-//void parseAccidental(NRT_DATA *d, char *n);
-//void parseOctave(NRT_DATA *d, char *n);
-//void parseDot(NRT_DATA *d);
-//int yylex();
-//int yyparse(void);
-//void yyerror(const char *s);
-//FILE *yyin;
-//NRT_DATA d;
 #include "nrt_parse.h"
 
 %}
@@ -77,7 +60,6 @@ note_base rhythm dot
 
 
 
-//solf: SOLF { printf("we found a SOLF %s\n", $1); } ;
 solf: SOLF { parseSolf(nrtGlobalData, $1); } ;
 rhythm: RHYTHM { parseRhythm(nrtGlobalData, $1); } ;
 accidental: ACC { parseAccidental(nrtGlobalData, $1); } ;
@@ -89,59 +71,6 @@ close_par: RPAREN { endCluster(nrtGlobalData); } ;
 begin_section: LBRAC { beginSection(nrtGlobalData); };
 end_section: RBRAC { endSection(nrtGlobalData); };
 %%
-//main(int argc, char **argv){
-//    char *filename;
-//    char *scorefile;
-//    int c;
-//    int index;
-//    d = createData();
-//    int csoundMode = FALSE;
-//    int jsonMode = FALSE;
-//    int readFromFile = TRUE;
-//    char *expr;
-//    while((c = getopt(argc, argv, "cjs:")) != -1 )
-//    {
-//        switch(c)
-//        {
-//            case 'c':
-//            csoundMode = TRUE;
-//            break;
-//            case 'j':
-//            jsonMode = TRUE;
-//            break;
-//            case 's':
-//            readFromFile = FALSE;
-//            expr = optarg;
-//            break;
-//        }
-//    }
-//    if(readFromFile == TRUE)
-//    {
-//    filename = argv[optind];
-//    if(csoundMode == TRUE){
-//    scorefile = argv[optind + 1];
-//    }
-//    FILE *input = fopen(filename, "r");
-//    if(!input)
-//    {
-//        printf("Error! Cannot find file.\n");
-//        return -1;
-//    }
-//    
-//    yyin = input;
-//    do{
-//        yyparse();
-//    }while(!feof(yyin));
-//    fclose(input);
-//    }else{ 
-//    yy_scan_string(expr); 
-//    yyparse();
-//    }
-//    if(csoundMode && readFromFile) writeCsoundScore(&d, scorefile);
-//    
-//    if(jsonMode) printJSON(&d);
-//    return 0;
-//}
 void yyerror(const char *s)
 {
 	printf("syntax error! \n");
@@ -197,16 +126,12 @@ void parseSolf(NRT_DATA *d, char *n)
 }
 void parseRhythm(NRT_DATA *d, int n)
 {
-    double rhythm = 0;
-    switch(n) 
-    {
-        case 1: rhythm = 4; break;
-        case 2: rhythm = 2; break;
-        case 4: rhythm = 1; break;
-        case 8: rhythm = 0.5; break;
-        case 16: rhythm = 0.25; break;
+    double rhythm;
+    if(n != 0){
+        rhythm = 4.0 / n;
+        updateCurrentDur(d, rhythm);
     }
-    if(rhythm != 0) updateCurrentDur(d, rhythm);
+
 }
 
 void parseAccidental(NRT_DATA *d, char *n)

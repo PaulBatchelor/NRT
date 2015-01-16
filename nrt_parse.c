@@ -13,7 +13,7 @@ void printCSV(NRT_DATA *d)
             n->time, d->sep, n->dur, d-> sep, n->solf);
     }
 }
-main(int argc, char **argv){
+int main(int argc, char **argv){
     char *filename;
     char *scorefile;
     int c;
@@ -71,7 +71,6 @@ main(int argc, char **argv){
     nrtparse();
     }
     printCSV(&d);
-   
 
     return 0;
 }

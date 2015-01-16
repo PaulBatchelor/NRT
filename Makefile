@@ -22,7 +22,7 @@ nrt_objects.o: $(NRT_OBJECTS)
 	ld -o nrt_objects.o -r lex.nrt.o nrt.tab.o nrt_vm.o
 
 libnrt.a: $(NRT_OBJECTS)
-	ld -o nrt_objects.o -r $(NRT_OBJECTS)
+	ar rcs libnrt.a $(NRT_OBJECTS)
 
 nrt.h: 
 	cat $(HEADER_FILES) > nrt.h
@@ -31,7 +31,7 @@ nrt: nrt_objects.o nrt_parse.c nrt.h libnrt.a
 	gcc  nrt_parse.c -o nrt libnrt.a
 
 clean:
-	rm -rf nrt.tab.* lex.nrt.c nrt nrt_vm.o *.o nrt.h
+	rm -rf nrt.tab.* lex.nrt.c nrt nrt_vm.o *.o nrt.h libnrt.a nrt_objects.o
 
 all:
 	make nrt

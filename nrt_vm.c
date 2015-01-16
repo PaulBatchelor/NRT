@@ -77,7 +77,7 @@ NRT_DATA createData(void (*process)(struct NRT_DATA *d)){
     d.numNotes = 0;
     d.printNumber = FALSE;
     d.isNewSection = TRUE;
-    d.sep = ',';
+    d.sep = ' ';
     d.process=process;
     return d;
 }
@@ -94,6 +94,7 @@ void addNote(NRT_DATA *d)
         d->current_dur = 1;
     }
     
+    //if(d->numNotes > 0 && d->isRest == FALSE) {
     if(d->numNotes > 0 && d->isRest == FALSE) {
         d->process(d);
     }
