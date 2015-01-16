@@ -1,25 +1,25 @@
 %{
 #include <stdio.h>
-#define YY_DECL int yylex()
+#define YY_DECL int nrtlex()
 #include "nrt.tab.h"
 
 %}
-
+%option noyywrap
 %%
 [ \n\t]                  ;
 "|"	;
 [drmfsltDRMFSLTDzZ] {
-//yylval.ascii = yytext;
-yylval.sval = strdup(yytext);
+//nrtlval.ascii = nrttext;
+nrtlval.sval = strdup(nrttext);
 return SOLF;
 }
-[0-9]+   yylval.ival = atoi(yytext); return RHYTHM;
+[0-9]+   nrtlval.ival = atoi(nrttext); return RHYTHM;
 [\+\=\-] {
-yylval.sval = strdup(yytext); 
+nrtlval.sval = strdup(nrttext); 
 return ACC;
 }
 [\,'] {
-yylval.sval = strdup(yytext); 
+nrtlval.sval = strdup(nrttext); 
 return OCT;
 }
 [\.] {
@@ -43,5 +43,5 @@ return RBRAC;
 
 //main()
 //{
-//yylex();
+//nrtlex();
 //}

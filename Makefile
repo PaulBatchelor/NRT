@@ -1,30 +1,28 @@
 default:
 	make all
 nrt.tab.c: nrt.y
-	bison -d nrt.y
+	bison -p nrt -d nrt.y
 
-lex.yy.c: nrt.l nrt.tab.c
-	flex --header-file="lex.yy.h" nrt.l
+lex.nrt.c: nrt.l nrt.tab.c
+	flex -P nrt --header-file="lex.nrt.h" nrt.l
 
 nrt_vm.o: nrt_vm.c nrt_vm.h
 	gcc -c nrt_vm.c
 
-lex.yy.o: lex.yy.c
-	gcc -c lex.yy.c
+lex.nrt.o: lex.nrt.c
+	gcc -c lex.nrt.c
 
 nrt.tab.o: nrt.tab.c
 	gcc -c nrt.tab.c
 
-nrt_objects.o: lex.yy.o nrt.tab.o nrt_vm.o
-	ld -o nrt_objects.o -r lex.yy.o nrt.tab.o nrt_vm.o
+nrt_objects.o: lex.nrt.o nrt.tab.o nrt_vm.o
+	ld -o nrt_objects.o -r lex.nrt.o nrt.tab.o nrt_vm.o
 
-#nrt: lex.yy.o nrt.tab.o nrt_vm.o nrt_parse.c
 nrt: nrt_objects.o nrt_parse.c
-	#gcc lex.yy.o nrt.tab.o nrt_vm.o nrt_parse.c -lfl -o nrt 
 	gcc nrt_objects.o nrt_parse.c -lfl -o nrt 
 
 clean:
-	rm -rf nrt.tab.* lex.yy.c nrt nrt_vm.o *.o
+	rm -rf nrt.tab.* lex.nrt.c nrt nrt_vm.o *.o
 
 all:
 	make nrt

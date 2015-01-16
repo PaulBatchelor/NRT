@@ -56,28 +56,21 @@ main(int argc, char **argv){
         if(!input)
         {
             //printf("Error! Cannot find file.\n");
-            yyin = stdin;
+            nrtin = stdin;
             readFromFile = FALSE;
             //return -1;
         }else{
-            yyin = input;
+            nrtin = input;
         } 
         do{
-            yyparse();
-        }while(!feof(yyin));
+            nrtparse();
+        }while(!feof(nrtin));
 
         if(readFromFile) fclose(input);
     }else{ 
-    yy_scan_string(expr); 
-    yyparse();
+    nrt_scan_string(expr); 
+    nrtparse();
     }
-    //if(csoundMode && readFromFile) writeCsoundScore(&nrtGlobalData, scorefile);
-    //if(csoundMode && readFromFile) writeCsoundScore(&d, scorefile);
-    //
-    ////if(jsonMode) printJSON(&nrtGlobalData);
-    //if(jsonMode) printJSON(&d);
-
-    //print last note value
     printCSV(&d);
    
 
