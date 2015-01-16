@@ -1,10 +1,25 @@
 #include "nrt_parse.h"
+void printCSV(NRT_DATA *d)
+{
+
+    NRT_NOTE *n = &d->note;
+    /* Make sure note isn't a rest first */ 
+    if(d->isRest == FALSE)
+    {
+        if(d->printNumber) {
+        fprintf(stdout, "%d%c", d->numNotes,
+            d->sep);
+        }
+        fprintf(stdout, "%g%c%g%c%d\n", 
+            n->time, d->sep, n->dur, d-> sep, n->solf);
+    }
+}
 main(int argc, char **argv){
     char *filename;
     char *scorefile;
     int c;
     int index;
-    NRT_DATA d = createData();
+    NRT_DATA d = createData(&printCSV);
     nrtGlobalData = &d;
     int csoundMode = FALSE;
     int jsonMode = FALSE;

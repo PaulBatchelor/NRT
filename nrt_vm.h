@@ -7,7 +7,7 @@ double time;
 double dur;
 } NRT_NOTE;
 
-typedef struct {
+typedef struct NRT_DATA{
 /**=NOTE: Weird things are happening here*/
 NRT_NOTE notes[200];
 int index;
@@ -21,6 +21,7 @@ double current_time;
 int numNotes;
 int printNumber;
 char sep;
+void (*process)(struct NRT_DATA *d);
 }NRT_DATA;
 
 void printVals(NRT_DATA *d);

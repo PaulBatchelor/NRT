@@ -66,7 +66,7 @@ NRT_NOTE createNewNote(NRT_DATA *d){
     return n;
 }
 
-NRT_DATA createData(){
+NRT_DATA createData(void (*process)(struct NRT_DATA *d)){
     NRT_DATA d;
     d.current_solf = 0;
     d.current_dur = 1;
@@ -78,6 +78,7 @@ NRT_DATA createData(){
     d.printNumber = FALSE;
     d.isNewSection = TRUE;
     d.sep = ',';
+    d.process=process;
     return d;
 }
 
@@ -94,7 +95,7 @@ void addNote(NRT_DATA *d)
     }
     
     if(d->numNotes > 0 && d->isRest == FALSE) {
-        printCSV(d);
+        d->process(d);
     }
     //create new note in index 
     if(d->isRest == FALSE)
@@ -104,22 +105,6 @@ void addNote(NRT_DATA *d)
         d->numNotes++;
     }
 
-}
-
-void printCSV(NRT_DATA *d)
-{
-
-    NRT_NOTE *n = &d->note;
-    /* Make sure note isn't a rest first */ 
-    if(d->isRest == FALSE)
-    {
-        if(d->printNumber) {
-        fprintf(stdout, "%d%c", d->numNotes,
-            d->sep);
-        }
-        fprintf(stdout, "%g%c%g%c%d\n", 
-            n->time, d->sep, n->dur, d-> sep, n->solf);
-    }
 }
 
 void beginCluster(NRT_DATA *d)

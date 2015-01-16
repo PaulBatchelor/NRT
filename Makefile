@@ -6,7 +6,7 @@ nrt.tab.c: nrt.y
 lex.yy.c: nrt.l nrt.tab.c
 	flex --header-file="lex.yy.h" nrt.l
 
-nrt_vm: nrt_vm.c nrt_vm.h
+nrt_vm.o: nrt_vm.c nrt_vm.h
 	gcc -c nrt_vm.c
 
 lex.yy.o: lex.yy.c
